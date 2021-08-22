@@ -33,7 +33,7 @@ export class CdkInfrastructureStack extends cdk.Stack {
     // const taskDef = new ecs.TaskDefinition(this, assetFolder+"TaskDef", {
     //   compatibility: Compatibility.FARGATE,
     //   memoryMiB: "1024",
-    //   cpu: "512"
+    //   cpu: "256"
     // });
 
     // taskDef.addContainer(assetFolder+"Container", {
@@ -49,14 +49,19 @@ export class CdkInfrastructureStack extends cdk.Stack {
     //     taskDefinition: taskDef
     // });
 
+    // //const featchedService = ecs.FargateService.fromFargateServiceArn(this, "fetchedFargateService", "arn:aws:ecs:us-east-2:571374152725:service/psgen-cluster/psgen-service-20-08-21");
+    
     // // Health check
     // //service.targetGroup.configureHealthCheck({path: "/health"});
+
+
+
 
     const service = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "infrastructureServiceId", {
       cluster: cluster,
       serviceName: serviceName,
       memoryLimitMiB: 1024,
-      cpu: 512,
+      cpu: 256,
       desiredCount: 1,
       taskImageOptions: {
           image: ecs.ContainerImage.fromAsset(assetFolder),
